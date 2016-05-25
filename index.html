@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>DH2323 Project</title>
+		<style>
+			body { margin: 0; padding: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+		<script src="three.js"></script>
+		<script>
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			//add light to scene
+			var light = new THREE.DirectionalLight( 0xffffff );
+			light.position.set( 0, 1, 1 ).normalize();
+			scene.add(light);
+
+			var phong = new THREE.MeshPhongMaterial();
+
+			//spehre
+			var spheregeometry = new THREE.SphereGeometry( 0.25, 32, 32 );
+			var sphere = new THREE.Mesh( spheregeometry, phong );
+			scene.add( sphere );
+
+			var sphere2 = new THREE.Mesh( spheregeometry, phong );
+			scene.add( sphere2 );
+
+			var geometry = new THREE.BoxGeometry( 2, 0.1, 0.1 );
+			var material = new THREE.MeshBasicMaterial( { color: 0x9E57E6 } );
+			var cube = new THREE.Mesh( geometry, phong );
+			scene.add( cube );
+
+			var material2 = new THREE.MeshBasicMaterial( { color: 0xB857E6 } );
+			var cube2 = new THREE.Mesh( geometry, phong );
+			scene.add( cube2 );
+
+			var material3 = new THREE.MeshBasicMaterial( { color: 0x8B57E6 } );
+			var cube3 = new THREE.Mesh( geometry, phong );
+			scene.add( cube3 );
+
+			camera.position.z = 5;
+
+			
+
+
+
+			//start rotation
+			cube.rotation.x = 1.57;
+			cube.rotation.y = 0;
+
+			cube2.rotation.x = 1.57;
+			cube2.rotation.y = 0.8;
+
+			cube3.rotation.x = 1.57;
+			cube3.rotation.y = 2.2;
+
+			//another "star"
+			var cube4 = new THREE.Mesh( geometry, phong );
+			var cube5 = new THREE.Mesh( geometry, phong );
+			var cube6 = new THREE.Mesh( geometry, phong );
+			scene.add( cube4 );
+			scene.add( cube5 );
+			scene.add( cube6 );
+
+			//start rotation
+			cube4.rotation.x = 1.57;
+			cube4.rotation.y = 0;
+
+			cube5.rotation.x = 1.57;
+			cube5.rotation.y = 0.8;
+
+			cube6.rotation.x = 1.57;
+			cube6.rotation.y = 2.2;
+
+			//position
+			cube4.position.set(10,2,-10);
+			cube5.position.set(10,2,-10);
+			cube6.position.set(10,2,-10);
+			sphere2.position.set(10,2,-10);
+
+
+			var tick=0;
+			var rand = 0;
+			var camposz = 5;
+			var camposx = 5;
+
+
+			function render() {
+				requestAnimationFrame( render );
+
+				// if (tick == 30){
+				// 	rand = Math.random()*0.05;
+				// 	tick = 0;
+				// 	rand2 = Math.random()*5 + 10;
+				// 	camera.position.z = rand2;
+				// 	// camera.position.x = rand2;
+				// }
+
+				// tick +=1;
+				
+				camera.position.z = camposz;
+				camera.position.x = camposx;
+
+				cube.rotation.x += 0.01;
+				cube.rotation.y += 0.01;
+
+				cube2.rotation.x += 0.01;
+				cube2.rotation.y += 0.01;
+
+				cube3.rotation.x += 0.01;
+				cube3.rotation.y += 0.01;
+
+				cube4.rotation.x += 0.02;
+				cube4.rotation.y += 0.02;
+
+				cube5.rotation.x += 0.02;
+				cube5.rotation.y += 0.02;
+
+				cube6.rotation.x += 0.02;
+				cube6.rotation.y += 0.02;
+				renderer.render( scene, camera );
+			}
+			render();
+
+			document.onkeydown = checkKey;
+
+			function checkKey(e) {
+
+			    e = e || window.event;
+
+			    if (e.keyCode == '38') {
+			        camposz +=1;
+			    }
+			    else if (e.keyCode == '40') {
+			         camposz -=1;
+			    }
+			    else if (e.keyCode == '37') {
+			        camposx -=1;
+			    }
+			    else if (e.keyCode == '39') {
+			        camposx +=1;
+			    }
+
+			}
+		</script>
+	</body>
+</html>
