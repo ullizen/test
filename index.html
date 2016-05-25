@@ -20,7 +20,9 @@
 
 			//add light to scene
 			var light = new THREE.DirectionalLight( 0xffffff );
+
 			light.position.set( 0, 0, 1 ).normalize();
+			
 			scene.add(light);
 
 			var phong = new THREE.MeshPhongMaterial();
